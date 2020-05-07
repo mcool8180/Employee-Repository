@@ -26,13 +26,13 @@ pipeline {
         }
       }
 
-      stage('Compile') {
-         steps {
-           sh 'mvn clean compile'
-            echo 'Compilation done'
-
-         }
-      }
+//       stage('Compile') {
+//          steps {
+//            sh 'mvn clean compile'
+//             echo 'Compilation done'
+//
+//          }
+//       }
      stage('Build') {
          steps {
           sh 'mvn clean package'
@@ -43,8 +43,6 @@ pipeline {
 //3 docker image run
            sh 'docker stop docker-emp-service'
            sh 'docker rm docker-emp-service'
-           echo 'Current Working Directory'
-           sh 'pwd'
            sh 'docker build -t docker-emp-service .'
            sh 'docker run --name docker-emp-service -it -d -p 8888:8888 -v /var/run/mysqld/mysqld.sock:/tmp/mysql.sock --network=host docker-emp-service'
               echo 'Build Done'
