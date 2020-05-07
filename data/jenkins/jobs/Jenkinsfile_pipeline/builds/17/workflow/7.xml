@@ -1,0 +1,111 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<Tag plugin="workflow-support@3.4">
+  <node class="cps.n.StepAtomNode" plugin="workflow-cps@2.80">
+    <parentIds>
+      <string>6</string>
+    </parentIds>
+    <id>7</id>
+    <descriptorId>org.jenkinsci.plugins.workflow.steps.scm.GenericSCMStep</descriptorId>
+  </node>
+  <actions>
+    <cps.a.ArgumentsActionImpl plugin="workflow-cps@2.80">
+      <arguments>
+        <entry>
+          <string>scm</string>
+          <org.jenkinsci.plugins.structs.describable.UninstantiatedDescribable plugin="structs@1.20">
+            <arguments class="tree-map">
+              <entry>
+                <string>branches</string>
+                <list>
+                  <org.jenkinsci.plugins.structs.describable.UninstantiatedDescribable>
+                    <arguments class="tree-map">
+                      <entry>
+                        <string>name</string>
+                        <string>*/master</string>
+                      </entry>
+                    </arguments>
+                    <model resolves-to="org.jenkinsci.plugins.structs.describable.DescribableModel$SerializedForm">
+                      <type>hudson.plugins.git.BranchSpec</type>
+                    </model>
+                  </org.jenkinsci.plugins.structs.describable.UninstantiatedDescribable>
+                </list>
+              </entry>
+              <entry>
+                <string>doGenerateSubmoduleConfigurations</string>
+                <boolean>false</boolean>
+              </entry>
+              <entry>
+                <string>extensions</string>
+                <list>
+                  <org.jenkinsci.plugins.structs.describable.UninstantiatedDescribable>
+                    <klass>CloneOption</klass>
+                    <arguments class="tree-map">
+                      <entry>
+                        <string>noTags</string>
+                        <boolean>false</boolean>
+                      </entry>
+                      <entry>
+                        <string>reference</string>
+                        <string></string>
+                      </entry>
+                      <entry>
+                        <string>shallow</string>
+                        <boolean>false</boolean>
+                      </entry>
+                      <entry>
+                        <string>timeout</string>
+                        <int>90</int>
+                      </entry>
+                    </arguments>
+                    <model resolves-to="org.jenkinsci.plugins.structs.describable.DescribableModel$SerializedForm">
+                      <type>hudson.plugins.git.extensions.impl.CloneOption</type>
+                    </model>
+                  </org.jenkinsci.plugins.structs.describable.UninstantiatedDescribable>
+                  <org.jenkinsci.plugins.structs.describable.UninstantiatedDescribable>
+                    <klass>WipeWorkspace</klass>
+                    <arguments class="tree-map"/>
+                    <model resolves-to="org.jenkinsci.plugins.structs.describable.DescribableModel$SerializedForm">
+                      <type>hudson.plugins.git.extensions.impl.WipeWorkspace</type>
+                    </model>
+                  </org.jenkinsci.plugins.structs.describable.UninstantiatedDescribable>
+                </list>
+              </entry>
+              <entry>
+                <string>submoduleCfg</string>
+                <list/>
+              </entry>
+              <entry>
+                <string>userRemoteConfigs</string>
+                <list>
+                  <org.jenkinsci.plugins.structs.describable.UninstantiatedDescribable>
+                    <arguments class="tree-map">
+                      <entry>
+                        <string>credentialsId</string>
+                        <string>GIT_HUB_CREDENTIALS</string>
+                      </entry>
+                      <entry>
+                        <string>url</string>
+                        <string>https://github.com/mcool8180/Employee-Repository.git</string>
+                      </entry>
+                    </arguments>
+                    <model resolves-to="org.jenkinsci.plugins.structs.describable.DescribableModel$SerializedForm">
+                      <type>hudson.plugins.git.UserRemoteConfig</type>
+                    </model>
+                  </org.jenkinsci.plugins.structs.describable.UninstantiatedDescribable>
+                </list>
+              </entry>
+            </arguments>
+            <model resolves-to="org.jenkinsci.plugins.structs.describable.DescribableModel$SerializedForm">
+              <type>hudson.plugins.git.GitSCM</type>
+            </model>
+          </org.jenkinsci.plugins.structs.describable.UninstantiatedDescribable>
+        </entry>
+      </arguments>
+      <isUnmodifiedBySanitization>true</isUnmodifiedBySanitization>
+    </cps.a.ArgumentsActionImpl>
+    <wf.a.TimingAction plugin="workflow-api@2.40">
+      <startTime>1588862674414</startTime>
+    </wf.a.TimingAction>
+    <s.a.LogStorageAction/>
+  </actions>
+</Tag>

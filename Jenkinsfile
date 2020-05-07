@@ -26,17 +26,17 @@ pipeline {
         }
       }
 
-//       stage('Compile') {
-//          steps {
-//            sh 'mvn clean compile'
-//             echo 'Compilation done'
-//
-//          }
-//       }
+      stage('Compile') {
+         steps {
+           sh 'mvn clean package'
+            echo 'Compilation done'
+
+         }
+      }
      stage('Build') {
          steps {
-          sh 'mvn clean package'
-//             sh './service.sh'
+//           sh 'mvn clean package'
+            sh './service.sh'
 // to do
 // build service jar
 // 1. docker image build from jar
