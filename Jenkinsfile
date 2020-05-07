@@ -19,7 +19,7 @@ pipeline {
       stage('Checkout') {
           steps {
 
-            git branch:'master', credentialsId: 'GIT_HUB_CREDENTIALS', url: 'https://github.com/mcool8180/JDBCemployee.git'
+            git branch:'master', credentialsId: 'GIT_HUB_CREDENTIALS', url: 'https://github.com/mcool8180/Employee-Repository.git'
 
 
         echo 'Checkout Done'
