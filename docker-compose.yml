@@ -1,0 +1,51 @@
+#version: '3'
+#services:
+#  mysql:
+#    image: mysql
+#    environment:
+#      MYSQL_ROOT_PASSWORD : Briozing@123
+#    ports:
+#    - 3307:3306
+#    network_mode: "host"
+#    volumes:
+#      - ./data/mysql:/var/lib/mysql
+#  users-mysql:
+#    image: users-mysql
+#    ports:
+#    - 8888:8888
+#    network_mode: "host"
+#    depends_on:
+#      - mysql
+
+
+version: '3'
+services:
+  mysql:
+    image: mysql
+    ports:
+      - 3306
+    environment:
+      MYSQL_ROOT_PASSWORD : Briozing@123
+      MYSQL_DATABASE: briozing
+      MYSQL_ROOT_HOST: '%'
+    volumes:
+
+        - ./data/mysqlByLink:/var/lib/mysql
+
+  users-mysql:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: users-mysql
+    environment:
+      DB_HOST: mysql
+    ports:
+      - 8888:8888
+    depends_on:
+      - mysql
+    links:
+      - mysql
+      - "mysql:mysql"
+    expose:
+      - 8888
+
