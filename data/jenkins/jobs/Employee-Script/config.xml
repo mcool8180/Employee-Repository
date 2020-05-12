@@ -1,0 +1,103 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<flow-definition plugin="workflow-job@2.39">
+  <actions>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobAction plugin="pipeline-model-definition@1.6.0"/>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction plugin="pipeline-model-definition@1.6.0">
+      <jobProperties/>
+      <triggers/>
+      <parameters/>
+      <options/>
+    </org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction>
+  </actions>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2.80">
+    <script>pipeline {
+   agent any
+   tools {
+          maven &apos;M3&apos;
+        }
+   stages {
+
+     stage(&apos;Initialize&apos;){
+      steps {
+        script {
+            def dockerHome = tool &apos;myDocker&apos;
+            env.PATH = &quot;${dockerHome}/bin:${env.PATH}&quot;
+           }
+         }
+      }
+
+
+
+      stage(&apos;Checkout&apos;) {
+          steps {
+
+            git branch:&apos;master&apos;, credentialsId: &apos;GIT_HUB_CREDENTIALS&apos;, url: &apos;https://github.com/mcool8180/Employee-Repository.git&apos;
+
+
+        echo &apos;Checkout Done&apos;
+        }
+      }
+
+      stage(&apos;Compile&apos;) {
+         steps {
+           sh &apos;mvn clean package&apos;
+            echo &apos;Compilation done&apos;
+
+         }
+      }
+     stage(&apos;Build&apos;) {
+         steps {
+//           sh &apos;mvn clean package&apos;
+            sh &apos;./service.sh&apos;
+// to do
+// build service jar
+// 1. docker image build from jar
+//3 docker image run
+           sh &apos;docker stop docker-emp-service&apos;
+           sh &apos;docker rm docker-emp-service&apos;
+           sh &apos;docker build -t docker-emp-service .&apos;
+           sh &apos;docker run --name docker-emp-service -it -d -p 8888:8888 -v /var/run/mysqld/mysqld.sock:/tmp/mysql.sock --network=host docker-emp-service&apos;
+              echo &apos;Build Done&apos;
+
+         }
+      }
+
+
+
+
+      stage(&apos;Checkout Test&apos;) {
+         steps {
+
+               git branch:&apos;master&apos;, credentialsId: &apos;GIT_HUB_CREDENTIALS&apos;, url: &apos;https://github.com/mcool8180/employee-restAssured.git&apos;
+
+         echo &apos;Checkout Test Done&apos;
+         }
+       }
+
+      stage(&apos;Compile Test&apos;) {
+          steps {
+             sh &apos;mvn clean compile&apos;
+             echo &apos;Compilation of Test is done&apos;
+
+          }
+       }
+      stage(&apos;Test&apos;) {
+         steps {
+            sh &apos;mvn clean test -Dgroups=addEmployee&apos;
+            echo &apos;Test case passed successfully&apos;
+
+         }
+       }
+
+
+
+   }
+}</script>
+    <sandbox>true</sandbox>
+  </definition>
+  <triggers/>
+  <disabled>false</disabled>
+</flow-definition>

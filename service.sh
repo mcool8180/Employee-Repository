@@ -1,3 +1,3 @@
-kill -9 $(lsof -t -i:8081 -sTCP:LISTEN)
+kill -9 $(lsof -t -i:8888 -sTCP:LISTEN)
 
 mvn spring-boot:run &

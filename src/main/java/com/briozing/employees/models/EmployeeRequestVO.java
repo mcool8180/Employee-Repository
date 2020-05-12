@@ -3,6 +3,7 @@ package com.briozing.employees.models;
 public class EmployeeRequestVO {
     public String name;
     public String emailId;
+    public String country;
 
     public String getName() {
         return name;
@@ -18,5 +19,13 @@ public class EmployeeRequestVO {
 
     public void setEmailId(String emailId) {
         this.emailId = emailId;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 }
